@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Calculator from './Components/Calculator';
+import Calculator from './Components/Calculator/index';
 
 ReactDOM.render(
   <React.StrictMode>
