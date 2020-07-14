@@ -11,10 +11,13 @@
     "react-scripts": "3.4.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "node ./scripts/start-non-split.js",
+    "build": "node ./scripts/build-non-split.js && node ./scripts/organize.js",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build-rename": "npm run build-rename-js && npm run build-rename-css",
+    "build-rename-js": "renamer --find \"/main\\.[^\\.]+\\.js/g\" --replace \"main.js\" build/static/js/*",
+    "build-rename-css": "renamer --find \"/main\\.[^\\.]+\\.css/\" --replace \"main.css\" build/static/css/*"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -30,5 +33,17 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cpy": "^8.1.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-react-hooks": "^4.0.4",
+    "eslint-plugin-standard": "^4.0.1",
+    "node-sass": "^4.14.1",
+    "rewire": "^5.0.0"
   }
 }
