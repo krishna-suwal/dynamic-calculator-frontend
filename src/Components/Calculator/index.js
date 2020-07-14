@@ -1,135 +1,102 @@
 import React from "react";
 import './Calculator.scss';
+import ActionButton from './ActionButton';
+import PrevOutput from './PrevOutput';
+import CurrentOutput from './CurrentOutput';
 
 const Calculator = (props) => {
   return (
     <div class="wp-calculator">
       <div class="wpc-output">
-        <div class="wpc-output__row">
-          <div class="wpc-output__previous-output">
-            <div class="wpc-output__previous-output__one-down">
-              <span class="wpc-output__previous-output__text">567</span>
-            </div>
-          </div>
-        </div>
-        <div class="wpc-output__row">
-          <div class="wpc-output__current-output">
-            <div class="wpc-output__current-output__one-down">
-              <span class="wpc-output__current-output__text">1234</span>
-            </div>
-          </div>
-        </div>
+        <PrevOutput/>
+        <CurrentOutput/>
       </div>
       <div class="wpc-actions">
         <table>
           <tbody>
             <tr class="wpc-actions__row">
               <td>
-                <div class="wpc-actions__action-button">Ans</div>
+                <ActionButton text="Ans"/>
               </td>
               <td>
-                <div class="wpc-actions__action-button">(</div>
+                <ActionButton text="("/>
               </td>
               <td>
-                <div class="wpc-actions__action-button">)</div>
+                <ActionButton text=")"/>
               </td>
               <td>
-                <div class="wpc-actions__action-button">%</div>
+                <ActionButton text="%"/>
               </td>
               <td>
-                <div class="wpc-actions__action-button">CE</div>
-              </td>
-            </tr>
-            <tr class="wpc-actions__row">
-              <td>
-                <div class="wpc-actions__action-button">√</div>
-              </td>
-              <td>
-                <div class="wpc-actions__action-button wpc-gray-white-bg">
-                  7
-                </div>
-              </td>
-              <td>
-                <div class="wpc-actions__action-button wpc-gray-white-bg">
-                  8
-                </div>
-              </td>
-              <td>
-                <div class="wpc-actions__action-button wpc-gray-white-bg">
-                  9
-                </div>
-              </td>
-              <td>
-                <div class="wpc-actions__action-button">÷</div>
+                <ActionButton text="CE"/>
               </td>
             </tr>
             <tr class="wpc-actions__row">
               <td>
-                <div class="wpc-actions__action-button"></div>
+                <ActionButton text="√"/>
               </td>
               <td>
-                <div class="wpc-actions__action-button wpc-gray-white-bg">
-                  4
-                </div>
+                <ActionButton text="7" className="wpc-gray-white-bg-imp" />
               </td>
               <td>
-                <div class="wpc-actions__action-button wpc-gray-white-bg">
-                  5
-                </div>
+                <ActionButton text="8" className="wpc-gray-white-bg-imp" />
               </td>
               <td>
-                <div class="wpc-actions__action-button wpc-gray-white-bg">
-                  6
-                </div>
+                <ActionButton text="9" className="wpc-gray-white-bg-imp" />
               </td>
               <td>
-                <div class="wpc-actions__action-button">×</div>
+                <ActionButton text="÷"/>
               </td>
             </tr>
             <tr class="wpc-actions__row">
               <td>
-                <div class="wpc-actions__action-button"></div>
+                <ActionButton text=""/>
               </td>
               <td>
-                <div class="wpc-actions__action-button wpc-gray-white-bg">
-                  1
-                </div>
+                <ActionButton text="4" className="wpc-gray-white-bg-imp" />
               </td>
               <td>
-                <div class="wpc-actions__action-button wpc-gray-white-bg">
-                  2
-                </div>
+                <ActionButton text="5" className="wpc-gray-white-bg-imp" />
               </td>
               <td>
-                <div class="wpc-actions__action-button wpc-gray-white-bg">
-                  3
-                </div>
+                <ActionButton text="6" className="wpc-gray-white-bg-imp" />
               </td>
               <td>
-                <div class="wpc-actions__action-button">−</div>
+                <ActionButton text="×"/>
               </td>
             </tr>
             <tr class="wpc-actions__row">
               <td>
-                <div class="wpc-actions__action-button">AC</div>
+                <ActionButton text=""/>
               </td>
               <td>
-                <div class="wpc-actions__action-button wpc-gray-white-bg">
-                  0
-                </div>
+                <ActionButton text="1" className="wpc-gray-white-bg-imp" />
               </td>
               <td>
-                <div class="wpc-actions__action-button wpc-gray-white-bg">
-                  .
-                </div>
+                <ActionButton text="2" className="wpc-gray-white-bg-imp" />
               </td>
               <td>
-                <div class="wpc-actions__action-button wpc-calculate-action">
-                  =
-                </div>
+                <ActionButton text="3" className="wpc-gray-white-bg-imp" />
               </td>
               <td>
-                <div class="wpc-actions__action-button">+</div>
+                <ActionButton text="−"/>
+              </td>
+            </tr>
+            <tr class="wpc-actions__row">
+              <td>
+                <ActionButton text="AC"/>
+              </td>
+              <td>
+                <ActionButton text="0" className="wpc-gray-white-bg-imp" />
+              </td>
+              <td>
+                <ActionButton text="." className="wpc-gray-white-bg-imp" />
+              </td>
+              <td>
+                <ActionButton text="=" className="wpc-calculate-action" />
+              </td>
+              <td>
+                <ActionButton text="+" />
               </td>
             </tr>
           </tbody>
