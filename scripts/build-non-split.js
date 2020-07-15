@@ -24,8 +24,8 @@ config.optimization.splitChunks = {
    },
 };
 config.optimization.runtimeChunk = false;
-config.output.filename = 'static/js/[name].js';
-config.output.chunkFilename = 'static/js/[name].js';
+config.output.filename = 'static/js/[name].[contenthash].js';
+config.output.chunkFilename = 'static/js/[name].[contenthash].js';
 
 /*
 * lets find `MiniCssExtractPlugin` type of object in plugins array and redefine it's options.
@@ -47,8 +47,8 @@ config.plugins = config.plugins.reduce( ( plugins, pluginItem ) => {
    if ( pluginItem instanceof MiniCssExtractPlugin ) {
       plugins.push(
          new MiniCssExtractPlugin( {
-            filename: 'static/css/[name].css',
-            chunkFilename: 'static/css/[name].css',
+            filename: 'static/css/[name].[contenthash].css',
+            chunkFilename: 'static/css/[name].[contenthash].css',
          } )
       );
    } else {
