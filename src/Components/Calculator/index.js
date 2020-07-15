@@ -2,9 +2,9 @@ import React from "react";
 import { connect } from 'react-redux';
 
 import {
-  fireCalculationInputAction, fireNumberInputAction, fireOperatorInputAction,
+  fireNumberInputAction, fireOperatorInputAction,
   fireOpenBracketInputAction, fireClosingBracketInputAction, clearEntry, allClear,
-  calculate } from '../../Redux/actions/calculatorActions';
+  firePrevAnsInputAction, fireZerosInputAction, calculate } from '../../Redux/actions/calculatorActions';
 import './Calculator.scss';
 import ActionButton from './ActionButton';
 import PrevOutput from './PrevOutput';
@@ -32,7 +32,10 @@ const Calculator = (props) => {
           <tbody>
             <tr class="wpc-actions__row">
               <td>
-                <ActionButton text="Ans" />
+                <ActionButton
+                  text = "Ans"
+                  onClick = {props.firePrevAnsInputAction}
+                  />
               </td>
               <td>
                 <ActionButton
@@ -61,7 +64,10 @@ const Calculator = (props) => {
             </tr>
             <tr class="wpc-actions__row">
               <td>
-                <ActionButton text="00"/>
+                <ActionButton
+                  text = "00"
+                  onClick = {() => props.fireZerosInputAction(2)}
+                  />
               </td>
               <td>
                 <ActionButton
@@ -93,7 +99,10 @@ const Calculator = (props) => {
             </tr>
             <tr class="wpc-actions__row">
               <td>
-                <ActionButton text="000"/>
+                <ActionButton
+                  text = "000"
+                  onClick = {() => props.fireZerosInputAction(3)}
+                  />
               </td>
               <td>
                 <ActionButton
@@ -125,7 +134,10 @@ const Calculator = (props) => {
             </tr>
             <tr class="wpc-actions__row">
               <td>
-                <ActionButton text="0000"/>
+                <ActionButton
+                  text = "0000"
+                  onClick = {() => props.fireZerosInputAction(4)}
+                  />
               </td>
               <td>
                 <ActionButton
@@ -194,9 +206,10 @@ const Calculator = (props) => {
 };
 
 export default connect((state, props) => ({...state, ...props}), {
-  fireCalculationInputAction,
   fireNumberInputAction,
+  fireZerosInputAction,
   fireOperatorInputAction,
+  firePrevAnsInputAction,
   fireOpenBracketInputAction,
   fireClosingBracketInputAction,
   clearEntry,

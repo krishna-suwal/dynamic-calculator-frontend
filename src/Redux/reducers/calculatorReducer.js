@@ -1,6 +1,6 @@
 import {
-    CALCULATION_INPUT_ACTION, NUMBER_INPUT, OPERATOR_INPUT,
-    OPEN_BRACKET_INPUT, CLOSING_BRACKET_INPUT,
+    NUMBER_INPUT, ZEROS_INPUT, OPERATOR_INPUT,
+    PREV_ANS_INPUT, OPEN_BRACKET_INPUT, CLOSING_BRACKET_INPUT,
     CLEAR_ENTRY, ALL_CLEAR,
     CALCULATE } from '../actions/types';
 import clone from 'clone';
@@ -9,21 +9,24 @@ const initialState = {
     prevOutput: '',
     currentOutput: '0',
     openBracketsCount: 0,
+    isOutputCalculationResult: false,
+    prevAns: 0,
 };
 
 export default function(state = initialState, action) {
     let newState = {};
 
     switch (action.type) {
-        case CALCULATION_INPUT_ACTION:
-            newState = clone(state);
-
-            return newState;
-
         case NUMBER_INPUT:
             newState = clone(state);
 
             if ( ! tailIsClosingBracket( newState.currentOutput ) ) {
+                if ( newState.isOutputCalculationResult ) {
+                    newState.prevOutput = `Ans = ${newState.currentOutput}`;
+                    newState.currentOutput = '';
+                    newState.isOutputCalculationResult = false;
+                }
+
                 if ( '0' === newState.currentOutput ) {
                     newState.currentOutput = '' + action.payload;
                 } else {
@@ -33,8 +36,23 @@ export default function(state = initialState, action) {
 
             return newState;
 
+        case ZEROS_INPUT:
+            newState = clone(state);
+
+            if ( tailIsNumber( newState.currentOutput ) && '0' !== newState.currentOutput ) {
+                newState.currentOutput += '' + action.payload;
+            }
+
+            return newState;
+
         case OPERATOR_INPUT:
             newState = clone(state);
+
+            if ( newState.isOutputCalculationResult ) {
+                newState.prevOutput = `Ans = ${newState.currentOutput}`;
+                newState.currentOutput = 'Ans';
+                newState.isOutputCalculationResult = false;
+            }
 
             if ( tailIsOperator( newState.currentOutput ) ) {
                 let chars = newState.currentOutput.split('');
@@ -43,7 +61,7 @@ export default function(state = initialState, action) {
                 chars.push( action.payload );
                 newState.currentOutput = chars.join('');
             } else if (
-                ( tailIsOpeningBracket( newState.currentOutput ) && '−' === newState.currentOutput ) ||
+                ( tailIsOpeningBracket( newState.currentOutput ) && '−' === action.payload ) ||
                 ! tailIsOpeningBracket( newState.currentOutput )
             ) {
                 newState.currentOutput += action.payload;
@@ -51,8 +69,29 @@ export default function(state = initialState, action) {
 
             return newState;
 
+        case PREV_ANS_INPUT:
+            newState = clone(state);
+
+            if ( '0' === newState.currentOutput ) {
+                newState.currentOutput = 'Ans';
+            } else if ( tailIsOpeningBracket( newState.currentOutput ) || tailIsOperator( newState.currentOutput ) ) {
+                newState.currentOutput += 'Ans';
+            } else if ( newState.isOutputCalculationResult ) {
+                newState.prevOutput = `Ans = ${newState.currentOutput}`;
+                newState.currentOutput = 'Ans';
+                newState.isOutputCalculationResult = false;
+            }
+
+            return newState;
+
         case OPEN_BRACKET_INPUT:
             newState = clone(state);
+
+            if ( newState.isOutputCalculationResult ) {
+                newState.prevOutput = `Ans = ${newState.currentOutput}`;
+                newState.currentOutput = '0';
+                newState.isOutputCalculationResult = false;
+            }
 
             if ( '0' === newState.currentOutput ) {
                 newState.currentOutput = '(';
@@ -99,12 +138,18 @@ export default function(state = initialState, action) {
             newState = clone(state);
             let expression = newState.currentOutput;
 
+            newState.prevOutput = newState.currentOutput + ' =';
+
             expression = expression.replace( /×/g, '*' );
             expression = expression.replace( /÷/g, '/' );
             expression = expression.replace( /R/g, '%' );
+            expression = expression.replace( /−/g, '-' );
+            expression = expression.replace( /Ans/g, newState.prevAns );
 
             // eslint-disable-next-line
-            newState.currentOutput = eval( expression ).toString();
+            newState.prevAns = eval( expression );
+            newState.currentOutput = newState.prevAns.toString();
+            newState.isOutputCalculationResult = true;
 
             return newState;
 

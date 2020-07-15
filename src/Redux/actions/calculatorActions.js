@@ -1,20 +1,26 @@
 import {
-    CALCULATION_INPUT_ACTION, NUMBER_INPUT, OPERATOR_INPUT,
-    OPEN_BRACKET_INPUT, CLOSING_BRACKET_INPUT,
+    NUMBER_INPUT, ZEROS_INPUT, OPERATOR_INPUT,
+    PREV_ANS_INPUT, OPEN_BRACKET_INPUT, CLOSING_BRACKET_INPUT,
     CLEAR_ENTRY, ALL_CLEAR,
     CALCULATE } from './types';
-
-export const fireCalculationInputAction = ( data ) => dispatch => {
-    dispatch({
-        type: CALCULATION_INPUT_ACTION,
-        payload: data,
-    });
-};
 
 export const fireNumberInputAction = ( value ) => dispatch => {
     if ( 'number' === typeof value ) {
         dispatch({
             type: NUMBER_INPUT,
+            payload: value,
+        });
+    }
+};
+
+export const fireZerosInputAction = ( numberOfZeros ) => dispatch => {
+    if ( 'number' === typeof numberOfZeros ) {
+        let value = '';
+
+        while( numberOfZeros ) { numberOfZeros--; value += '0'; }
+
+        dispatch({
+            type: ZEROS_INPUT,
             payload: value,
         });
     }
@@ -27,6 +33,13 @@ export const fireOperatorInputAction = ( value ) => dispatch => {
             payload: value,
         });
     }
+};
+
+export const firePrevAnsInputAction = () => dispatch => {
+    dispatch({
+        type: PREV_ANS_INPUT,
+        payload: true,
+    });
 };
 
 export const fireOpenBracketInputAction = () => dispatch => {
