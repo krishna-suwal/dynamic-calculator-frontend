@@ -7,7 +7,7 @@ const CalculatorActionButton = (props) => {
 
     return (
         <div
-            className = {`wpc-actions__action-button ${props.className}`}
+            className = {`dc-actions__action-button ${props.className}`}
             onClick = {props.onClick}
             data-value = {value}
             {...spreadProps}

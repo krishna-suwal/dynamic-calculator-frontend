@@ -22,15 +22,15 @@ const Calculator = (props) => {
     }
   }
   return (
-    <div class="wp-calculator">
-      <div class="wpc-output">
+    <div class="d-calculator">
+      <div class="dc-output">
         <PrevOutput prevOutput={props.calculator.prevOutput} />
         <CurrentOutput currentOutput={props.calculator.currentOutput} />
       </div>
-      <div class="wpc-actions">
+      <div class="dc-actions">
         <table>
           <tbody>
-            <tr class="wpc-actions__row">
+            <tr class="dc-actions__row">
               <td>
                 <ActionButton
                   text = "Ans"
@@ -62,7 +62,7 @@ const Calculator = (props) => {
                   />
               </td>
             </tr>
-            <tr class="wpc-actions__row">
+            <tr class="dc-actions__row">
               <td>
                 <ActionButton
                   text = "00"
@@ -72,21 +72,21 @@ const Calculator = (props) => {
               <td>
                 <ActionButton
                   value = "7"
-                  className = "wpc-gray-white-bg-imp"
+                  className = "dc-gray-white-bg-imp"
                   onClick = {callback__fireNumberInputAction}
                   />
               </td>
               <td>
                 <ActionButton
                   value = "8"
-                  className = "wpc-gray-white-bg-imp"
+                  className = "dc-gray-white-bg-imp"
                   onClick = {callback__fireNumberInputAction}
                   />
               </td>
               <td>
                 <ActionButton
                   value = "9"
-                  className = "wpc-gray-white-bg-imp"
+                  className = "dc-gray-white-bg-imp"
                   onClick = {callback__fireNumberInputAction}
                   />
               </td>
@@ -97,7 +97,7 @@ const Calculator = (props) => {
                   />
               </td>
             </tr>
-            <tr class="wpc-actions__row">
+            <tr class="dc-actions__row">
               <td>
                 <ActionButton
                   text = "000"
@@ -107,21 +107,21 @@ const Calculator = (props) => {
               <td>
                 <ActionButton
                   value = "4"
-                  className = "wpc-gray-white-bg-imp"
+                  className = "dc-gray-white-bg-imp"
                   onClick = {callback__fireNumberInputAction}
                   />
               </td>
               <td>
                 <ActionButton
                   value = "5"
-                  className = "wpc-gray-white-bg-imp"
+                  className = "dc-gray-white-bg-imp"
                   onClick = {callback__fireNumberInputAction}
                   />
               </td>
               <td>
                 <ActionButton
                   value = "6"
-                  className = "wpc-gray-white-bg-imp"
+                  className = "dc-gray-white-bg-imp"
                   onClick = {callback__fireNumberInputAction}
                   />
               </td>
@@ -132,7 +132,7 @@ const Calculator = (props) => {
                   />
               </td>
             </tr>
-            <tr class="wpc-actions__row">
+            <tr class="dc-actions__row">
               <td>
                 <ActionButton
                   text = "0000"
@@ -142,21 +142,21 @@ const Calculator = (props) => {
               <td>
                 <ActionButton
                   value = "1"
-                  className = "wpc-gray-white-bg-imp"
+                  className = "dc-gray-white-bg-imp"
                   onClick = {callback__fireNumberInputAction}
                   />
               </td>
               <td>
                 <ActionButton
                   value = "2"
-                  className = "wpc-gray-white-bg-imp"
+                  className = "dc-gray-white-bg-imp"
                   onClick = {callback__fireNumberInputAction}
                   />
               </td>
               <td>
                 <ActionButton
                   value = "3"
-                  className = "wpc-gray-white-bg-imp"
+                  className = "dc-gray-white-bg-imp"
                   onClick = {callback__fireNumberInputAction}
                   />
               </td>
@@ -167,7 +167,7 @@ const Calculator = (props) => {
                   />
               </td>
             </tr>
-            <tr class="wpc-actions__row">
+            <tr class="dc-actions__row">
               <td>
                 <ActionButton
                   text = "AC"
@@ -177,17 +177,17 @@ const Calculator = (props) => {
               <td>
                 <ActionButton
                   value = "0"
-                  className = "wpc-gray-white-bg-imp"
+                  className = "dc-gray-white-bg-imp"
                   onClick = {callback__fireNumberInputAction}
                   />
               </td>
               <td>
-                <ActionButton text="." className="wpc-gray-white-bg-imp" />
+                <ActionButton text="." className="dc-gray-white-bg-imp" />
               </td>
               <td>
                 <ActionButton
                   text = "="
-                  className = "wpc-calculate-action"
+                  className = "dc-calculate-action"
                   onClick = {props.calculate}
                   />
               </td>

@@ -4,15 +4,15 @@ import Calculator from './Components/Calculator/index';
 import { Provider } from 'react-redux';
 import store from './Redux/store';
 
-const wpc_element = document.getElementById( 'wp-calculator-container' );
+const dc_element = document.getElementById( 'dc-calculator-container' );
 
-if ( wpc_element ) {
+if ( dc_element ) {
   ReactDOM.render(
     <React.StrictMode>
       <Provider store={store}>
         <Calculator/>
       </Provider>
     </React.StrictMode>,
-    wpc_element
+    dc_element
   );
 }
