@@ -11,21 +11,56 @@ import PrevOutput from './PrevOutput';
 import CurrentOutput from './CurrentOutput';
 
 const Calculator = (props) => {
-  const callback__fireNumberInputAction = e => {
-    if ( e.target.dataset.value ) {
-      props.fireNumberInputAction( parseInt( e.target.dataset.value ) );
-    }
-  }
-  const callback__fireOperatorInputAction = e => {
-    if ( e.target.dataset.value ) {
-      props.fireOperatorInputAction( e.target.dataset.value );
-    }
-  }
+  const [expression, setExpression] = React.useState( '0' );
+  const [previousOutput, setPreviousOutput] = React.useState( null );
+
+  const addToken = (token) => {
+    setExpression( expression + token );
+  };
+  const strucuture = [
+    [
+      {
+        text: 'Ans',
+      },
+      {
+        text: '(',
+      },
+      {
+        text: ')',
+      },
+      {
+        text: 'R',
+      },
+      {
+        text: 'CE',
+      },
+    ],
+  ]
+  .map( row => {
+    return <tr className="dc-actions__row">
+      {
+        row.map( cell => {
+          const onClick = cell.onClick && 'function' === typeof cell.onClick ? cell.onClick : e => {
+            // addToken( cell.value ? cell )
+          }
+          return (
+            <ActionButton
+              value = {cell.text}
+              onClick = {e => {
+                addToken( '(' );
+              }}
+              />
+          )
+        })
+      }
+    </tr>
+  })
+
   return (
     <div class="d-calculator">
       <div class="dc-output">
-        <PrevOutput prevOutput={props.calculator.prevOutput} />
-        <CurrentOutput currentOutput={props.calculator.currentOutput} />
+        <PrevOutput prevOutput={previousOutput} />
+        <CurrentOutput currentOutput={expression} />
       </div>
       <div class="dc-actions">
         <table>
@@ -40,7 +75,9 @@ const Calculator = (props) => {
               <td>
                 <ActionButton
                   value = "("
-                  onClick = {props.fireOpenBracketInputAction}
+                  onClick = {e => {
+                    addToken( '(' );
+                  }}
                   />
               </td>
               <td>
